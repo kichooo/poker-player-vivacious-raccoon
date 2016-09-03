@@ -1,8 +1,10 @@
 var _ = require('lodash')
 
 function isFigure(card) {
-    return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A"
+    return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A" || card.rank === "10"
 }
+
+
 
 module.exports = {
 
