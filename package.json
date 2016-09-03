@@ -3,7 +3,7 @@
   "description": "Javascript player from lean poker. http://leanpoker.org",
   "version": "0.0.2",
   "engines": {
-    "node": "^6.x"
+    "node": "<4"
   },
   "private": true,
   "dependencies": {
@@ -11,8 +11,7 @@
     "express": "4.x",
     "lodash": "^4.15.0",
     "request": "^2.74.0",
-    "request-promise": "^4.1.1",
-    "request-promise-native": "^1.0.3"
+    "request-promise": "^4.1.1"
   },
   "devDependencies": {
     "tap": "^7.0.0"
