@@ -2,7 +2,7 @@ var hand_eval = require('./hand_evaluator.js')
 
 module.exports = {
 
-    VERSION: "Vivatious racoon",
+    VERSION: "Vivatious racoon 1",
 
     bet_request: function(state, bet) {
         console.log(state.players);
@@ -16,7 +16,7 @@ module.exports = {
         }
 
         bet(0)
-        
+
     },
 
     showdown: function(state) {
