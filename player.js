@@ -18,12 +18,9 @@ module.exports = {
 
     bet_request: (state, bet) => {
         if (!games.hasOwnProperty('game_id')) {
-            games[state.game_id] = {
-                initialEval = hand_evaluator.eval_hand(state.players[state.in_action].hole_cards)
-            }
+            games[state.game_id] = hand_evaluator.eval_hand(state.players[state.in_action].hole_cards)
         }
-
-        if (points > 500) {
+        if (games[state.game_id] > 500) {
             var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
             bet(raise)
             return
@@ -31,10 +28,12 @@ module.exports = {
 
         bet(0)
     },
-
     showdown: function(state) {
 
     }
+
+
+
 };
 
 
