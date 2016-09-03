@@ -36,19 +36,14 @@ module.exports = {
     getEvalRemotly(cards, community) {
         const options = {
             method: 'POST',
-            uri: 'http://api.posttestserver.com/post',
-            body: {
-                some: 'payload'
-            },
-            json: true // Automatically stringifies the body to JSON
+            uri: 'http://rainman.leanpoker.org/rank',
+            body: 'cards=' + JSON.stringify(cards),
         };
 
-        rp(options)
-            .then((parsedBody) => {
-                // POST succeeded...
+        return rp(options)
+            .then((res) => JSON.parse(res))
+            .catch((err) => {
+                console.error('wrong estimantion', err)
             })
-            .catch(function (err) {
-                // POST failed...
-            });
     }
 };
