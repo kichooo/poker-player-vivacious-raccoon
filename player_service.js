@@ -4,15 +4,15 @@ var bodyParser = require('body-parser')
 var app = express()
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
     res.send(200, 'OK')
 })
 
-app.post('/', function (req, res) {
+app.post('/', function(req, res) {
     if (req.body.action == 'bet_request') {
-        player.bet_request(JSON.parse(req.body.game_state), function (bet) {
+        player.bet_request(JSON.parse(req.body.game_state), function(bet) {
             res.send(200, bet.toString())
         })
     } else if (req.body.action == 'showdown') {
