@@ -34,11 +34,6 @@ function eval2Sync(cards) {
     return 0
 }
 
-function eval5Sync(cards, community = []) {
-    let twoCardsEval = eval_hand(cards)
-    return twoCardsEval
-}
-
 // [{ rank: "A", suit: "spades" },
 // { rank: "K", suit: "spades" },
 // { rank: "J", suit: "spades" },
@@ -54,4 +49,8 @@ function evalRemotely(cards, community = []) {
     return rp(options)
         .then((res) => JSON.parse(res))
         .then(data => data.rank * 100)
+        .catch(err => {
+            console.error(err)
+            return eval2Sync(cards)
+        })
 }
