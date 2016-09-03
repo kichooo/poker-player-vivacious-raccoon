@@ -5,7 +5,7 @@ module.exports = {
 
     VERSION: "Vivatious racoon 13:23",
 
-    bet_request: function(state, bet) {
+    bet_request: (state, bet) => {
         console.log(state.players);
         // Minimum raise amount. To raise you have to return at least:
         //     current_buy_in - players[in_action][bet] + minimum_raise
