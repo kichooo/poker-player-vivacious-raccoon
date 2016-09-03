@@ -8,7 +8,7 @@ module.exports = {
 
 
         var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
-
+        console.log(state.players);
         bet(raise);
     },
 
