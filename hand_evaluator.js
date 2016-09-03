@@ -22,13 +22,11 @@ module.exports = {
     },
     eval_hand_with_3community: function() {
 
+
         var allCards = _.concat(cards, community);
         allCards.map()
             // Count number of pairs.
-
-
-        // we expect at least one pair. At this stage.
-
+            // we expect at least one pair. At this stage.
 
     }
 };
