@@ -23,11 +23,13 @@ module.exports = {
             games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards)
                 // random chance for all in
                 // for now, always all in.
-            games[state.game_id] = 1000
-                // if (games[state.game_id] > 100) {
-                //     if (_.random(0, 3) === 0) {
-                //         games[state.game_id] = 1000
-                //     }
+
+            if (games[state.game_id] > 100) {
+                games[state.game_id] = 1000
+            }
+            //     if (_.random(0, 3) === 0) {
+            //         games[state.game_id] = 1000
+            //     }
 
 
             // }
