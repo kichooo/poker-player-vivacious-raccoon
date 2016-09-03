@@ -23,17 +23,18 @@ tap.test('smoke test', () =>
 const cards = [
     {"rank": "5", "suit": "diamonds"},
     {"rank": "6", "suit": "diamonds"},
+]
+
+const communityCards = [
     {"rank": "7", "suit": "diamonds"},
     {"rank": "7", "suit": "spades"},
     {"rank": "8", "suit": "diamonds"},
     {"rank": "9", "suit": "diamonds"}
 ]
 
-// tap.test('eval remotely', () =>
-//     handEval.evalRemotly(cards, []).then(d=> {
-        console.log(d)
-        // tap.ok(d.rank > 1)
-        // tap.ok(d.value > 1)
-        // tap.ok(d.second_value > 1)
-    // })
-// )
+tap.test('eval remotely', () =>
+    handEval.evalRemotely(cards, communityCards).then(d => {
+        console.log('rank', d)
+        tap.ok(d)
+    })
+)
