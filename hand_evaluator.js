@@ -35,19 +35,19 @@ module.exports = {
             // Count number of pairs.
             // we expect at least one pair. At this stage.
 
-    },
-
-    getEvalRemotly(cards, community) {
-        const options = {
-            method: 'POST',
-            uri: 'http://rainman.leanpoker.org/rank',
-            body: 'cards=' + JSON.stringify(cards),
-        };
-
-        return rp(options)
-            .then((res) => JSON.parse(res))
-            .catch((err) => {
-                console.error('wrong estimantion', err)
-            })
     }
 };
+
+function getEvalRemotly(cards, community) {
+    const options = {
+        method: 'POST',
+        uri: 'http://rainman.leanpoker.org/rank',
+        body: 'cards=' + JSON.stringify(cards),
+    };
+
+    return rp(options)
+        .then((res) => JSON.parse(res))
+        .catch((err) => {
+            console.error('wrong estimantion', err)
+        })
+}
