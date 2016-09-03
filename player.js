@@ -1,4 +1,5 @@
 var hand_eval = require('./hand_evaluator.js')
+var _ = require('lodash')
 
 module.exports = {
 

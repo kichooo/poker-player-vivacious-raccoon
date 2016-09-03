@@ -1,8 +1,11 @@
+var _ = require('lodash')
+
 module.exports = {
 
-    eval_hand: function(cards) {
-        // var cards = state.players[state.in_action].hole_cards
-        
+    eval_hand: function(cards, community) {
+
+        var allCards = _.concat(cards, community);
+
         // check if figure
         if (isFigure(cards[0]) || isFigure(cards[1]))
             return 1000000
