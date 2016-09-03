@@ -3,7 +3,13 @@ module.exports = {
     VERSION: "Default JavaScript folding player",
 
     bet_request: function(state, bet) {
-        bet(0);
+        // Minimum raise amount. To raise you have to return at least:
+        //     current_buy_in - players[in_action][bet] + minimum_raise
+
+
+        var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
+
+        bet(raise);
     },
 
     showdown: function(state) {
