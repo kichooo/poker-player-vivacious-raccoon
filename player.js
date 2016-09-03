@@ -3,7 +3,7 @@ var _ = require('lodash')
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 1",
+    VERSION: "Vivatious racoon 12:20",
 
     bet_request: function(state, bet) {
         console.log(state.players);
