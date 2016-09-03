@@ -12,44 +12,63 @@ const log = (state) => rp({
 
 games = {}
 
+
+function bidding(bet, state) {
+    const me = state.players[state.in_action]
+
+
+    if (games[state.game_id] > 100) {
+        var min_raise = state.current_buy_in - me.bet + state.minimum_raise
+        var current_investment_level = me.bet / (me.stack + me.bet)
+        if (current_investment_level <= games[state.game_id] / 1000) {
+            if (min_raise >= me.stack)
+                return bet(me.stack)
+            return bet(min_raise)
+        } else {
+            // fold
+            return bet(0)
+        }
+
+    }
+    return bet(0)
+}
+
+
+// two cards, nothing on table, implemented by kich
+function blindGame(state, bet) {
+
+}
+
+// 2 cards in hand and 3 or 4 or 5 on table, implemented by syzer
+function normalGame(state, bet) {
+
+}
+
 module.exports = {
 
     VERSION: "Vivatious racoon 14:37",
 
     bet_request: (state, bet) => {
-        const me = state.players[state.in_action]
-
-        if (!games.hasOwnProperty('game_id')) {
-            games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards, state.community_cards).then(rank => {
-
-            })
-                // random chance for all in
-                // for now, always all in.
-
-            if (games[state.game_id] > 100) {
-                games[state.game_id] = 1000
-            }
-            //     if (_.random(0, 3) === 0) {
-            //         games[state.game_id] = 1000
-            //     }
-
-
-            // }
+        if (state.communityCards.length === 0) {
+            return blindGame(state, bet)
+        } else {
+            return normalGame()
         }
-        if (games[state.game_id] > 100) {
-            var min_raise = state.current_buy_in - me.bet + state.minimum_raise
-            var current_investment_level = me.bet / (me.stack + me.bet)
-            if (current_investment_level <= games[state.game_id] / 1000) {
-                if (min_raise >= me.stack)
-                    return bet(me.stack)
-                return bet(min_raise)
-            } else {
-                // fold
-                return bet(0)
-            }
 
-        }
-        return bet(0)
+        // const me = state.players[state.in_action]
+
+        // if (!games.hasOwnProperty('game_id')) {
+        //     hand_evaluator.eval_hand(me.hole_cards, state.community_cards).then(rank => {
+        //         console.log(rank)
+        //         games[state.game_id] = rank
+        //         if (games[state.game_id] > 100) {
+        //             games[state.game_id] = 1000
+        //         }
+        //     }).then(() => bidding(bet, state))
+        // } else {
+        //     bidding(bet, state)
+        // }
+
     },
     showdown: function(state) {
 
