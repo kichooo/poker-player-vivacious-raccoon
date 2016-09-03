@@ -20,7 +20,9 @@ module.exports = {
         const me = state.players[state.in_action]
 
         if (!games.hasOwnProperty('game_id')) {
-            games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards)
+            games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards, state.community_cards).then(rank => {
+
+            })
                 // random chance for all in
             if (games[state.game_id] > 100) {
                 if (_.random(0, 3) === 0) {
@@ -47,9 +49,9 @@ module.exports = {
     },
     showdown: function(state) {
 
-    }
+    },
 
-
+    log
 
 };
 
