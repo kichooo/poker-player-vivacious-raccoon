@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 curl -d 'action=bet_request&game_state={
   "players":[
     {
