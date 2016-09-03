@@ -1,5 +1,9 @@
 var _ = require('lodash')
 
+function isFigure(card) {
+    return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A"
+}
+
 module.exports = {
 
     eval_hand: function(cards, community) {
@@ -15,9 +19,8 @@ module.exports = {
 
     eval_hand_with_community: function() {
         var allCards = _.concat(cards, community);
+        // we expect at least one pair. At this stage.
+
+
     }
 };
-
-function isFigure(card) {
-    return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A"
-}

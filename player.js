@@ -1,4 +1,4 @@
-var hand_eval = require('./hand_evaluator.js')
+var hand_evaluator = require('./hand_evaluator.js')
 var _ = require('lodash')
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
         console.log(state.players);
         // Minimum raise amount. To raise you have to return at least:
         //     current_buy_in - players[in_action][bet] + minimum_raise
-        var points = hand_eval(state.players[state.in_action].cards)
+        var points = hand_evaluator.eval_hand(state.players[state.in_action].hole_cards)
         if (points > 500000) {
             var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
             bet(raise)
