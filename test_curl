@@ -29,5 +29,6 @@ curl -d 'action=bet_request&game_state={
   "community_cards":[],
   "current_buy_in":0,
   "pot":0,
-  "in_action": 0
+  "in_action": 0,
+  "minimum_raise": 5
 }' localhost:1337
