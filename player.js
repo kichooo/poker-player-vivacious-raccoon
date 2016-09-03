@@ -15,7 +15,7 @@ let games = {}
 // two cards, nothing on table, implemented by kich
 function blindGame(state, bet) {
     const me = state.players[state.in_action]
-    if (games.hasOwnProperty(state.game_id)) {
+    if (!games.hasOwnProperty(state.game_id)) {
         games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards)
     }
 
