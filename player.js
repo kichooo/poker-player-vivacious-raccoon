@@ -34,15 +34,20 @@ function blindGame(state, bet) {
         }
 
         const min_raise = state.current_buy_in - me.bet + state.minimum_raise
-        const current_investment_level = me.bet / (me.stack + me.bet)
-        if (current_investment_level <= games[state.game_id] / 1000) {
-            if (min_raise >= me.stack)
-                return bet(me.stack)
-            return bet(min_raise)
-        } else {
-            // fold
-            return bet(0)
-        }
+
+        if (min_raise >= me.stack)
+            return bet(me.stack)
+        return bet(min_raise)
+
+        // const current_investment_level = me.bet / (me.stack + me.bet)
+        // if (current_investment_level <= games[state.game_id] / 1000) {
+        //     if (min_raise >= me.stack)
+        //         return bet(me.stack)
+        //     return bet(min_raise)
+        // } else {
+        //     // fold
+        //     return bet(0)
+        // }
 
     }
     return bet(0)
