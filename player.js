@@ -1,6 +1,6 @@
 module.exports = {
 
-    VERSION: "Default JavaScript folding player",
+    VERSION: "Vivatious racoon",
 
     bet_request: function(state, bet) {
         // Minimum raise amount. To raise you have to return at least:
