@@ -6,22 +6,27 @@ function isFigure(card) {
     return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A"
 }
 
-
 module.exports = {
 
     eval_hand: function(cards) {
         if (cards[0].rank === cards[1].rank) {
             // Check if pair of figures
             if (isFigure(cards[0])) {
-                return 1000
+                return 200
             }
-
-            return 200
+            // Pair of not figures. If '2' or '3' we don't care, it is too low.
+            if (cards[0].rank === "2" || cards[0].rank === "3")
+                return 50
+            return 100
         }
+
+        if (isFigure(cards[0]) && isFigure(cards[1]))
+            return 150
+
 
         // check if figure
         if (isFigure(cards[0]) || isFigure(cards[1]))
-            return 300
+            return 130
 
         return 0
     },
