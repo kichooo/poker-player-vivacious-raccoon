@@ -63,11 +63,11 @@ function normalGame(state, bet) {
     // if (!games.hasOwnProperty('game_id')) {
     hand_evaluator.evalRemotely(me.hole_cards, state.community_cards)
         .then(rank => {
-            if (rank > 800) {
+            if (rank >= 500) {
                 // allin
                 return bet(me.stack)
             }
-            if (rank > 600) {
+            if (rank >= 300) {
                 return stay(state, bet)
             }
             //
