@@ -14,7 +14,7 @@ games = {}
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 14:25",
+    VERSION: "Vivatious racoon 14:37",
 
     bet_request: (state, bet) => {
         const me = state.players[state.in_action]
@@ -22,13 +22,15 @@ module.exports = {
         if (!games.hasOwnProperty('game_id')) {
             games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards)
                 // random chance for all in
-            if (games[state.game_id] > 100) {
-                if (_.random(0, 3) === 0) {
-                    games[state.game_id] = 1000
-                }
+                // for now, always all in.
+            games[state.game_id] = 1000
+                // if (games[state.game_id] > 100) {
+                //     if (_.random(0, 3) === 0) {
+                //         games[state.game_id] = 1000
+                //     }
 
 
-            }
+            // }
         }
         if (games[state.game_id] > 100) {
             var min_raise = state.current_buy_in - me.bet + state.minimum_raise
