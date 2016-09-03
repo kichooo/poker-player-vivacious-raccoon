@@ -35,19 +35,21 @@ function eval2Sync(cards) {
 }
 
 function eval5Sync(cards, community = []) {
-    let twoCardsEval = eval_hand(cards);
+    let twoCardsEval = eval_hand(cards)
     return twoCardsEval
 }
 
-// [{ rank: "A", suit: "spades" }, { rank: "K", suit: "spades" }, { rank: "J", suit: "spades" }, { rank: "3", suit: "spades" }, { rank: "2", suit: "spades" }]
+// [{ rank: "A", suit: "spades" },
+// { rank: "K", suit: "spades" },
+// { rank: "J", suit: "spades" },
+// { rank: "3", suit: "spades" },
+// { rank: "2", suit: "spades" }]
 function evalRemotely(cards, community = []) {
     const options = {
         method: 'POST',
         uri: 'http://rainman.leanpoker.org/rank',
         body: 'cards=' + JSON.stringify(cards.concat(community)),
     };
-
-    // log(cards.concat(community))
 
     return rp(options)
         .then((res) => JSON.parse(res))
