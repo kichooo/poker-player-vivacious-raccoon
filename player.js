@@ -1,3 +1,5 @@
+var hand_eval = require('./hand_evaluator.js')
+
 module.exports = {
 
     VERSION: "Vivatious racoon",
@@ -5,9 +7,13 @@ module.exports = {
     bet_request: function(state, bet) {
         // Minimum raise amount. To raise you have to return at least:
         //     current_buy_in - players[in_action][bet] + minimum_raise
+        var points = hand_eval(state.players[state.in_action].cards)
+        if (points > 500000) {
+            var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
+            bet()
+        }
 
 
-        var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
         console.log(state.players);
         bet(raise);
     },
