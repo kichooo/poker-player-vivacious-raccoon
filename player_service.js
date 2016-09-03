@@ -6,11 +6,9 @@ var app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/', function(req, res) {
-    res.send(200, 'OK')
-})
+app.get('/', (req, res) => res.status(200).send('OK'))
 
-app.post('/', function(req, res) {
+app.post('/', (req, res) => {
     if (req.body.action == 'bet_request') {
         player.bet_request(JSON.parse(req.body.game_state), function(bet) {
             res.status(200).send(bet.toString())
