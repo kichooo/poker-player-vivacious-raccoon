@@ -26,8 +26,8 @@ curl -d 'action=bet_request&game_state={
   "small_blind":10,
   "orbits":0,
   "dealer":0,
-  "community_cards":[],
-  "current_buy_in":20,
+  "community_cards":[{"rank": "10", "suit": "clubs"}, {"rank": "K", "suit": "spades"}, {"rank": "Q", "suit": "hearts"}],
+  "current_buy_in":10,
   "pot":0,
   "in_action": 0,
   "minimum_raise": 5

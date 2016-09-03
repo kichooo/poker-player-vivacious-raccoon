@@ -50,7 +50,7 @@ function blindGame(state, bet) {
     return bet(0)
 }
 
-function stay(state, bet) {
+function stay(state, bet, me) {
     bet(state.current_buy_in - me.bet)
 }
 
@@ -61,12 +61,13 @@ function normalGame(state, bet) {
     // if (!games.hasOwnProperty('game_id')) {
     hand_evaluator.evalRemotely(me.hole_cards, state.community_cards)
         .then(rank => {
+            console.log(rank)
             if (rank >= 500) {
                 // allin
                 return bet(me.stack)
             }
-            if (rank >= 300) {
-                return stay(state, bet)
+            if (rank >= 200) {
+                return stay(state, bet, me)
             }
             //
             if (rank < 200) {
@@ -78,13 +79,13 @@ function normalGame(state, bet) {
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 14:37",
+    VERSION: "Vivatious racoon 16:44",
 
     bet_request: (state, bet) => {
         if (state.community_cards.length === 0) {
             return blindGame(state, bet)
         }
-        return normalGame()
+        return normalGame(state, bet)
 
     },
     showdown: function(state) {
