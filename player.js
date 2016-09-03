@@ -46,6 +46,10 @@ function blindGame(state, bet) {
         //     return bet(0)
         // }
 
+    } else {
+        // If we are small blind, it is worth to check.
+        if (state.current_buy_in === state.small_blind * 2 && me.bet === state.small_blind)
+            return stay(state, bet, me)
     }
     return bet(0)
 }
@@ -79,7 +83,7 @@ function normalGame(state, bet) {
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 16:44",
+    VERSION: "Vivatious racoon 16:56",
 
     bet_request: (state, bet) => {
         if (state.community_cards.length === 0) {
