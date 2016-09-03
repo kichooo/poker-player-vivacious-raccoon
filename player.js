@@ -14,7 +14,7 @@ games = {}
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 13:40",
+    VERSION: "Vivatious racoon 13:53",
 
     bet_request: (state, bet) => {
         if (!games.hasOwnProperty('game_id')) {
