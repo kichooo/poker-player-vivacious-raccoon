@@ -66,18 +66,18 @@ function normalGame(state, bet) {
     hand_evaluator.evalRemotely(me.hole_cards, state.community_cards)
         .then(rank => {
             console.log(rank)
-            if (rank >= 500) {
+            if (rank >= 300) {
                 // allin
                 return bet(me.stack)
             }
-            if (rank >= 200) {
+            if (rank >= 100) {
                 return stay(state, bet, me)
             }
-            //
-            if (rank < 200) {
-                //fold
-                return bet(0)
-            }
+            // fold
+            return bet(0)
+            // if (rank < 100) {
+
+            // }
         })
 }
 
