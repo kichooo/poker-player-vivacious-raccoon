@@ -14,19 +14,26 @@ games = {}
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 13:53",
+    VERSION: "Vivatious racoon 14:17",
 
     bet_request: (state, bet) => {
-        if (!games.hasOwnProperty('game_id')) {
-            games[state.game_id] = hand_evaluator.eval_hand(state.players[state.in_action].hole_cards)
-        }
-        if (games[state.game_id] > 500) {
-            var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
-            bet(raise)
-            return
-        }
+        const me = state.players[state.in_action]
 
-        bet(0)
+        if (!games.hasOwnProperty('game_id')) {
+            games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards)
+        }
+        if (games[state.game_id] > 100) {
+            var min_raise = state.current_buy_in - me.bet + state.minimum_raise
+            var current_investment_level = me.bet / (me.stack + me.bet)
+            if (current_investment_level < games[state.game_id] / 1000) {
+                return bet(min_raise)
+            } else {
+                // fold
+                return bet(0)
+            }
+
+        }
+        return bet(0)
     },
     showdown: function(state) {
 
