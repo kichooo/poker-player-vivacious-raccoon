@@ -9,6 +9,9 @@ function isFigure(card) {
 module.exports = {
 
     eval_hand: function(cards, community) {
+
+        getEvalRemotly(cards).then(console.log)
+
         if (cards[0].rank === cards[1].rank) {
             // Check if pair of figures
             if (isFigure(cards[0])) {
