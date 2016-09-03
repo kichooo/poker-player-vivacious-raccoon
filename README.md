@@ -6,6 +6,8 @@ Javascript client skeleton for Lean Poker For more information visit: http://lea
 
 tests
 =====
+```sh
 nodemon player_service.js
 curl http://0.0.0.0:1337
-nodemon -x tap test
+nodemon -x tap test -R nyan
+```
