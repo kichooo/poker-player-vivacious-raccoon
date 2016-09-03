@@ -1,4 +1,5 @@
-var _ = require('lodash')
+const _ = require('lodash')
+const rp = require('request-promise')
 
 function isFigure(card) {
     return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A" || card.rank === "10"
@@ -30,5 +31,24 @@ module.exports = {
             // Count number of pairs.
             // we expect at least one pair. At this stage.
 
+    },
+
+    getEvalRemotly(cards, community) {
+        const options = {
+            method: 'POST',
+            uri: 'http://api.posttestserver.com/post',
+            body: {
+                some: 'payload'
+            },
+            json: true // Automatically stringifies the body to JSON
+        };
+
+        rp(options)
+            .then((parsedBody) => {
+                // POST succeeded...
+            })
+            .catch(function (err) {
+                // POST failed...
+            });
     }
 };
