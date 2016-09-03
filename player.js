@@ -3,14 +3,12 @@ const _ = require('lodash')
 const rp = require('request-promise')
 
 const log = (state) => rp({
-    method: 'POST',
-    uri: 'https://heroku-sink-666.herokuapp.com',
-    body: state,
-    json: true
-}).then((data) => {
-})
-    .catch((err) => {
-    })
+        method: 'POST',
+        uri: 'https://heroku-sink-666.herokuapp.com',
+        body: state,
+        json: true
+    }).then((data) => {})
+    .catch((err) => {})
 
 let games = {}
 
@@ -83,13 +81,13 @@ module.exports = {
     VERSION: "Vivatious racoon 14:37",
 
     bet_request: (state, bet) => {
-        if (state.communityCards.length === 0) {
+        if (state.community_cards.length === 0) {
             return blindGame(state, bet)
         }
         return normalGame()
 
     },
-    showdown: function (state) {
+    showdown: function(state) {
 
     },
 
