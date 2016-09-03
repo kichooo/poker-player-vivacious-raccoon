@@ -14,7 +14,7 @@ games = {}
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 14:17",
+    VERSION: "Vivatious racoon 14:25",
 
     bet_request: (state, bet) => {
         const me = state.players[state.in_action]
