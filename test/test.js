@@ -30,7 +30,7 @@ const cards = [
 ]
 
 tap.test('eval remotely', () =>
-    handEval.getEvalRemotly(cards, null).then(d=> {
+    handEval.evalRemotly(cards, []).then(d=> {
         // console.log(d)
         tap.ok(d.rank > 1)
         tap.ok(d.value > 1)

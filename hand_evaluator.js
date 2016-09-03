@@ -7,33 +7,40 @@ function isFigure(card) {
 }
 
 module.exports = {
-
-    eval_hand: function(cards) {
-        if (cards[0].rank === cards[1].rank) {
-            // Check if pair of figures
-            if (isFigure(cards[0])) {
-                return 200
-            }
-            // Pair of not figures. If '2' or '3' we don't care, it is too low.
-            if (cards[0].rank === "2" || cards[0].rank === "3")
-                return 50
-            return 100
-        }
-
-        if (isFigure(cards[0]) && isFigure(cards[1]))
-            return 150
-
-
-        // check if figure
-        if (isFigure(cards[0]) || isFigure(cards[1]))
-            return 130
-
-        return 0
-    },
-    getEvalRemotly
+    eval_hand: eval2Sync,
+    evalRemotely
 };
 
-function getEvalRemotly(cards, community = [{ rank: "A", suit: "spades" }, { rank: "K", suit: "spades" }, { rank: "J", suit: "spades" }, { rank: "3", suit: "spades" }, { rank: "2", suit: "spades" }]) {
+function eval2Sync(cards) {
+    if (cards[0].rank === cards[1].rank) {
+        // Check if pair of figures
+        if (isFigure(cards[0])) {
+            return 200
+        }
+        // Pair of not figures. If '2' or '3' we don't care, it is too low.
+        if (cards[0].rank === "2" || cards[0].rank === "3")
+            return 50
+        return 100
+    }
+
+    if (isFigure(cards[0]) && isFigure(cards[1]))
+        return 150
+
+
+    // check if figure
+    if (isFigure(cards[0]) || isFigure(cards[1]))
+        return 130
+
+    return 0
+}
+
+function eval5Sync(cards, community = []) {
+    let twoCardsEval = eval_hand(cards);
+    return twoCardsEval
+}
+
+// [{ rank: "A", suit: "spades" }, { rank: "K", suit: "spades" }, { rank: "J", suit: "spades" }, { rank: "3", suit: "spades" }, { rank: "2", suit: "spades" }]
+function evalRemotely(cards, community = []) {
     const options = {
         method: 'POST',
         uri: 'http://rainman.leanpoker.org/rank',
