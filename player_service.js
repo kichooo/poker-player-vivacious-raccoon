@@ -13,15 +13,15 @@ app.get('/', function(req, res) {
 app.post('/', function(req, res) {
     if (req.body.action == 'bet_request') {
         player.bet_request(JSON.parse(req.body.game_state), function(bet) {
-            res.send(200, bet.toString())
+            res.status(200).send(bet.toString())
         })
     } else if (req.body.action == 'showdown') {
         player.showdown(JSON.parse(req.body.game_state))
-        res.send(200, 'OK')
+        res.status(200).send('OK')
     } else if (req.body.action == 'version') {
-        res.send(200, player.VERSION)
+        res.status(200).send(player.VERSION)
     } else {
-        res.send(200, 'OK')
+        res.status(200).send('OK')
     }
 
 })
