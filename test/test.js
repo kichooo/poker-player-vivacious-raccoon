@@ -1,29 +1,28 @@
 const tap = require('tap')
 const rp = require('request-promise')
-const url = `http://0.0.0.0:1337/`
+const url = `http://0.0.0.0:1337?action=bet_request&game_state=`
 const handEval = require('../hand_evaluator')
 const game1 = require(__dirname + '/../data/game1.json')
 const game2 = require(__dirname + '/../data/game2.json')
 
-tap.test('smoke test', () =>
-    rp({
-        uri: url,
-        method: 'POST',
-        body: `action=bet_request&game_state=` + JSON.stringify(game1),
-        // json: true // Automatically parses the JSON string in the response
-    }).then(d => {
+const newReq = (jsonData) => rp({
+    uri: url,
+    body: JSON.stringify(jsonData),
+    // json: true: wont work because bug in original game implementation
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+
+tap.test('start game', () =>
+    newReq(game1).then(d => {
         console.log(d)
         tap.ok(d)
     }).catch(console.error)
 )
 
-tap.test('test end game', () =>
-    rp({
-        uri: url,
-        method: 'POST',
-        body: `action=bet_request&game_state=` + JSON.stringify(game2),
-        // json: true // Automatically parses the JSON string in the response
-    }).then(d => {
+tap.test('end game', () =>
+    newReq(game2).then(d => {
         console.log(d)
         tap.ok(d)
     }).catch(console.error)
@@ -31,7 +30,7 @@ tap.test('test end game', () =>
 
 const cards = [
     {"rank": "5", "suit": "diamonds"},
-    {"rank": "6", "suit": "diamonds"},
+    {"rank": "5", "suit": "diamonds"},
 ]
 
 const communityCards = [
@@ -41,9 +40,10 @@ const communityCards = [
     {"rank": "9", "suit": "diamonds"}
 ]
 
+// unit test
 tap.test('eval remotely', () =>
     handEval.evalRemotely(cards, communityCards).then(d => {
         console.log('rank', d)
-        tap.ok(d)
+        tap.ok("Rank is defined")
     })
 )
