@@ -83,7 +83,7 @@ function normalGame(state, bet) {
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 16:56",
+    VERSION: "Vivatious racoon 17:17",
 
     bet_request: (state, bet) => {
         if (state.community_cards.length === 0) {
