@@ -9,6 +9,8 @@
   "dependencies": {
     "body-parser": "1.15.2",
     "express": "4.x",
+    "lodash": "^4.15.0",
+    "request": "^2.74.0",
     "request-promise": "^4.1.1",
     "request-promise-native": "^1.0.3"
   }
