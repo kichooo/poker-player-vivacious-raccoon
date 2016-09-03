@@ -6,10 +6,11 @@ function isFigure(card) {
 
 module.exports = {
 
-    eval_hand: function(cards, community) {
+    eval_hand: function (cards, community) {
         if (cards[0].rank === cards[1].rank) {
             // Check if pair of figures
-            if (isFigure(cards[0]) return 1000000
+            if (isFigure(cards[0])) {
+                return 1000000
             }
 
             // // check if figure
@@ -17,21 +18,16 @@ module.exports = {
             //     return 700000
 
             // check if pair
-
-
         }
         return 0
     },
 
-    eval_hand_with_3community: function() {
+    eval_hand_with_3community: function () {
 
         var allCards = _.concat(cards, community);
         allCards.map()
-            // Count number of pairs.
-
-
+        // Count number of pairs.
         // we expect at least one pair. At this stage.
-
 
     }
 };
