@@ -3,6 +3,7 @@ const rp = require('request-promise')
 const url = `http://0.0.0.0:1337/`
 const handEval = require('../hand_evaluator')
 const game1 = require(__dirname + '/../data/game1.json')
+const game2 = require(__dirname + '/../data/game2.json')
 
 tap.test('smoke test', () =>
     rp({
@@ -20,7 +21,7 @@ tap.test('test end game', () =>
     rp({
         uri: url,
         method: 'POST',
-        body: `action=bet_request&game_state=` + JSON.stringify(game1),
+        body: `action=bet_request&game_state=` + JSON.stringify(game2),
         // json: true // Automatically parses the JSON string in the response
     }).then(d => {
         console.log(d)
