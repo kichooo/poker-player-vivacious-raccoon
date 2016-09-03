@@ -34,6 +34,8 @@ module.exports = {
             var min_raise = state.current_buy_in - me.bet + state.minimum_raise
             var current_investment_level = me.bet / (me.stack + me.bet)
             if (current_investment_level <= games[state.game_id] / 1000) {
+                if (min_raise >= me.stack)
+                    return bet(me.stack)
                 return bet(min_raise)
             } else {
                 // fold
