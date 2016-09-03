@@ -2,9 +2,8 @@ const _ = require('lodash')
 const rp = require('request-promise')
 
 function isFigure(card) {
-    return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A" || card.rank === "10"
+    return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A"
 }
-
 
 
 module.exports = {
@@ -12,14 +11,16 @@ module.exports = {
     eval_hand: function(cards, community) {
         if (cards[0].rank === cards[1].rank) {
             // Check if pair of figures
-            if (isFigure(cards[0])) return 1000000
+            if (isFigure(cards[0])) {
+                return 1000
+            }
+
+            return 200
         }
 
-        // // check if figure
-        // if (isFigure(cards[0]) || isFigure(cards[1]))
-        //     return 700000
-
-        // check if pair
+        // check if figure
+        if (isFigure(cards[0]) || isFigure(cards[1]))
+            return 300
 
         return 0
     },

@@ -3,38 +3,44 @@ const _ = require('lodash')
 const rp = require('request-promise')
 
 const log = (state) => rp({
-    method: 'POST',
-    uri: 'https://heroku-sink-666.herokuapp.com',
-    body: state,
-    json: true
-}).then((data) => {
-    })
-    .catch((err) => {
-    })
+        method: 'POST',
+        uri: 'https://heroku-sink-666.herokuapp.com',
+        body: state,
+        json: true
+    }).then((data) => {})
+    .catch((err) => {})
+
+games = {}
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 13:40",
+    VERSION: "Vivatious racoon 14:17",
 
     bet_request: (state, bet) => {
-        log(state)
-        console.log(state.players)
-        // Minimum raise amount. To raise you have to return at least:
-        //     current_buy_in - players[in_action][bet] + minimum_raise
-        var points = hand_evaluator.eval_hand(state.players[state.in_action].hole_cards)
-        if (points > 500000) {
-            var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
-            bet(raise)
-            return
+        const me = state.players[state.in_action]
+
+        if (!games.hasOwnProperty('game_id')) {
+            games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards)
         }
+        if (games[state.game_id] > 100) {
+            var min_raise = state.current_buy_in - me.bet + state.minimum_raise
+            var current_investment_level = me.bet / (me.stack + me.bet)
+            if (current_investment_level < games[state.game_id] / 1000) {
+                return bet(min_raise)
+            } else {
+                // fold
+                return bet(0)
+            }
 
-        bet(0)
-
+        }
+        return bet(0)
     },
-
-    showdown: function (state) {
+    showdown: function(state) {
 
     }
+
+
+
 };
 
 
