@@ -1,8 +1,10 @@
 var _ = require('lodash')
 
 function isFigure(card) {
-    return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A"
+    return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A" || card.rank === "10"
 }
+
+
 
 module.exports = {
 
@@ -22,13 +24,11 @@ module.exports = {
     },
     eval_hand_with_3community: function() {
 
+
         var allCards = _.concat(cards, community);
         allCards.map()
             // Count number of pairs.
-
-
-        // we expect at least one pair. At this stage.
-
+            // we expect at least one pair. At this stage.
 
     }
 };
