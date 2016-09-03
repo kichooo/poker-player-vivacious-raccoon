@@ -3,7 +3,6 @@ const _ = require('lodash')
 const rp = require('request-promise')
 
 const log = (state) => rp({
-        method: 'POST',
         uri: 'https://heroku-sink-666.herokuapp.com',
         body: state,
         json: true
@@ -59,15 +58,15 @@ function stay(state, bet, me) {
 }
 
 // 2 cards in hand and 3 or 4 or 5 on table, implemented by syzer
+// bet is cb
 function normalGame(state, bet) {
     const me = state.players[state.in_action]
 
-    // if (!games.hasOwnProperty('game_id')) {
     hand_evaluator.evalRemotely(me.hole_cards, state.community_cards)
         .then(rank => {
             console.log(rank)
             if (rank >= 300) {
-                // allin
+                // all-in
                 return bet(me.stack)
             }
             if (rank >= 100) {
@@ -75,9 +74,6 @@ function normalGame(state, bet) {
             }
             // fold
             return bet(0)
-            // if (rank < 100) {
-
-            // }
         })
 }
 
@@ -92,10 +88,12 @@ module.exports = {
         return normalGame(state, bet)
 
     },
+
+    // never needed
     showdown: function(state) {
 
     },
 
-    log: log
+    log
 
 };
