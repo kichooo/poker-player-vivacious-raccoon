@@ -1,6 +1,5 @@
 const _ = require('lodash')
 const rp = require('request-promise')
-const log = require('./player').log
 
 function isFigure(card) {
     return card.rank === "J" || card.rank === "Q" || card.rank === "K" || card.rank === "A"
