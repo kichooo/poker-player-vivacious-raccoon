@@ -5,17 +5,18 @@ module.exports = {
     VERSION: "Vivatious racoon",
 
     bet_request: function(state, bet) {
+        console.log(state.players);
         // Minimum raise amount. To raise you have to return at least:
         //     current_buy_in - players[in_action][bet] + minimum_raise
         var points = hand_eval(state.players[state.in_action].cards)
         if (points > 500000) {
             var raise = state.current_buy_in - state.players[state.in_action].bet + state.minimum_raise
-            bet()
+            bet(raise)
+            return
         }
 
-
-        console.log(state.players);
-        bet(raise);
+        bet(0)
+        
     },
 
     showdown: function(state) {
