@@ -20,7 +20,7 @@ function eval2Sync(cards) {
         // Pair of not figures. If '2' or '3' we don't care, it is too low.
         if (cards[0].rank === "2" || cards[0].rank === "3")
             return 50
-        return 100
+        return 130
     }
 
     if (isFigure(cards[0]) && isFigure(cards[1]))
@@ -29,7 +29,7 @@ function eval2Sync(cards) {
 
     // check if figure
     if (isFigure(cards[0]) || isFigure(cards[1]))
-        return 130
+        return 100
 
     return 0
 }
