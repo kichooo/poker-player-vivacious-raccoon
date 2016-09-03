@@ -1,6 +1,6 @@
-var hand_evaluator = require('./hand_evaluator.js')
-var _ = require('lodash')
-const rp = require('resuest-promise')
+const hand_evaluator = require('./hand_evaluator')
+const _ = require('lodash')
+const rp = require('request-promise')
 
 const log = (state) => rp({
     method: 'POST',
@@ -18,7 +18,7 @@ module.exports = {
 
     bet_request: (state, bet) => {
         log(state)
-        console.log(state.players);
+        console.log(state.players)
         // Minimum raise amount. To raise you have to return at least:
         //     current_buy_in - players[in_action][bet] + minimum_raise
         var points = hand_evaluator.eval_hand(state.players[state.in_action].hole_cards)
