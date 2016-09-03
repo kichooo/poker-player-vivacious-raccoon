@@ -3,6 +3,7 @@ module.exports = {
     VERSION: "Vivatious racoon",
 
     bet_request: function(state, bet) {
+        requset (sadsadas)
         // Minimum raise amount. To raise you have to return at least:
         //     current_buy_in - players[in_action][bet] + minimum_raise
 
