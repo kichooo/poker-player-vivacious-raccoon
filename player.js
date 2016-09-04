@@ -1,13 +1,15 @@
-const hand_evaluator = require('./hand_evaluator')
-const _ = require('lodash')
+// const _ = require('lodash')
 const rp = require('request-promise')
+const handEvaluator = require('./hand_evaluator')
 
-const log = (state) => rp({
-        uri: 'https://heroku-sink-666.herokuapp.com',
-        body: state,
-        json: true
-    }).then((data) => {})
-    .catch((err) => {})
+let now = new Date()
+
+const log = state => rp({
+    uri: 'https://heroku-sink-666.herokuapp.com',
+    body: state,
+    json: true
+}).then(() => {})
+    .catch(() => {})
 
 let games = {}
 
@@ -15,7 +17,7 @@ let games = {}
 function blindGame(state, bet) {
     const me = state.players[state.in_action]
     if (!games.hasOwnProperty(state.game_id)) {
-        games[state.game_id] = hand_evaluator.eval_hand(me.hole_cards)
+        games[state.game_id] = handEvaluator.eval_hand(me.hole_cards)
     }
 
     if (games[state.game_id] > 0) {
@@ -25,8 +27,6 @@ function blindGame(state, bet) {
                 games[state.game_id] = 0
                 return bet(0)
             }
-
-
         }
 
         const min_raise = state.current_buy_in - me.bet + state.minimum_raise
@@ -44,7 +44,6 @@ function blindGame(state, bet) {
         //     // fold
         //     return bet(0)
         // }
-
     } else {
         // If we are small blind, it is worth to check.
         if (state.current_buy_in === state.small_blind * 2 && me.bet === state.small_blind)
@@ -62,7 +61,7 @@ function stay(state, bet, me) {
 function normalGame(state, bet) {
     const me = state.players[state.in_action]
 
-    hand_evaluator.evalRemotely(me.hole_cards, state.community_cards)
+    handEvaluator.evalRemotely(me.hole_cards, state.community_cards)
         .then(rank => {
             console.log(rank)
             if (rank >= 300) {
@@ -79,21 +78,20 @@ function normalGame(state, bet) {
 
 module.exports = {
 
-    VERSION: "Vivatious racoon 17:17",
+    VERSION: `Vivatious racoon ${now.getHours()}:${now.getMinutes()}`,
 
     bet_request: (state, bet) => {
         if (state.community_cards.length === 0) {
             return blindGame(state, bet)
         }
         return normalGame(state, bet)
-
     },
 
     // never needed
-    showdown: function(state) {
+    showdown: state => {
 
     },
 
     log
 
-};
+}
